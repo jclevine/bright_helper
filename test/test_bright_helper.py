@@ -21,3 +21,10 @@ class TestBrightHelper(TestCase):
         self.assertEqual(1, bright_helper.get_allowance(MealType.LUNCH, FoodType.FAT))
         self.assertEqual(0, bright_helper.get_allowance(MealType.LUNCH, FoodType.SALAD))
 
+        self.assertEqual(1, bright_helper.get_allowance(MealType.DINNER, FoodType.PROTEIN))
+        self.assertEqual(0, bright_helper.get_allowance(MealType.DINNER, FoodType.GRAIN))
+        self.assertEqual(0, bright_helper.get_allowance(MealType.DINNER, FoodType.FRUIT))
+        self.assertEqual(1, bright_helper.get_allowance(MealType.DINNER, FoodType.VEGGIES))
+        self.assertEqual(1, bright_helper.get_allowance(MealType.DINNER, FoodType.FAT))
+        self.assertEqual(1, bright_helper.get_allowance(MealType.DINNER, FoodType.SALAD))
+

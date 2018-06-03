@@ -9,6 +9,7 @@ class Gender(Enum):
 class MealType(Enum):
     BREAKFAST = 'Breakfast'
     LUNCH = 'Lunch'
+    DINNER = 'Dinner'
 
 
 class FoodType(Enum):
