@@ -8,6 +8,7 @@ class Gender(Enum):
 
 class MealType(Enum):
     BREAKFAST = 'Breakfast'
+    LUNCH = 'Lunch'
 
 
 class FoodType(Enum):
@@ -16,6 +17,7 @@ class FoodType(Enum):
     FRUIT = 'Fruit'
     VEGGIES = 'Veggies'
     FAT = 'Fat'
+    SALAD = 'Salad'
 
 
 class MealPlanType(Enum):

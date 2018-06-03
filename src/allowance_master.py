@@ -9,6 +9,12 @@ class PyAllowanceMaster(object):
                     FoodType.PROTEIN: 1,
                     FoodType.GRAIN: 1,
                     FoodType.FRUIT: 1
+                },
+                MealType.LUNCH: {
+                    FoodType.PROTEIN: 1,
+                    FoodType.VEGGIES: 1,
+                    FoodType.FRUIT: 1,
+                    FoodType.FAT: 1
                 }
             }
         }
