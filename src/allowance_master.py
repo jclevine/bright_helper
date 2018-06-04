@@ -4,7 +4,7 @@ from src.food_master import PyFoodMaster as FoodMaster
 
 
 class PyAllowanceMaster(object):
-    _bible = {
+    _allowance_bible = {
         Gender.MALE: {
             MealPlanType.WEIGHT_LOSS: {
                 MealType.BREAKFAST: {
@@ -31,33 +31,41 @@ class PyAllowanceMaster(object):
     def __init__(self, gender, meal_plan_type):
         self._gender = gender
         self._meal_plan_type = meal_plan_type
-        self._food_types_remaining = deepcopy(self._bible)
+        self._food_types_remaining = deepcopy(self._allowance_bible)
         self._food_master = FoodMaster(gender, meal_plan_type)
 
     def get_meal_type_options(self, meal_type, food_type):
-        if self._dict_has_all_nested_keys(self._food_types_remaining, self._gender,
-                                          self._meal_plan_type, meal_type, food_type):
-            this_food_remaining = self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food_type]
-            return self._food_master.get_options(food_type, this_food_remaining)
+        if self._is_food_type_allowed_for_meal_type(meal_type, food_type):
+            food_type_allowance_remaining = self._get_food_type_allowance_remaining(meal_type, food_type)
+            return self._food_master.get_options(food_type, food_type_allowance_remaining)
         else:
-            return []
+            return set()
+
+    def _get_food_type_allowance_remaining(self, meal_type, food_type):
+        return self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food_type]
 
     def choose_food(self, meal_type, food, ounces):
-        if self._dict_has_all_nested_keys(self._food_types_remaining, self._gender,
-                                          self._meal_plan_type, meal_type, food.type):
-            food_type_remaining = self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food.type]
+        if self._is_food_type_allowed_for_meal_type(meal_type, food.type):
+            food_type_allowance_remaining = self._get_food_type_allowance_remaining(meal_type, food.type)
             one_serving_in_oz = self._food_master.get_one_serving_in_ounces(food)
-            oz_remaining = food_type_remaining * one_serving_in_oz
+            oz_remaining = food_type_allowance_remaining * one_serving_in_oz
 
             if ounces > oz_remaining:
                 raise Exception('{} oz of {} is more than your limit for {} -- only {} oz remaining'
                                 .format(ounces, food, meal_type, oz_remaining))
             else:
-                percentage_of_food_type_remaining = food_type_remaining - (ounces / one_serving_in_oz)
-                self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food.type] = percentage_of_food_type_remaining
+                food_type_allowance_remaining = food_type_allowance_remaining - (ounces / one_serving_in_oz)
+                self._set_food_type_allowance_remaining(meal_type, food.type, food_type_allowance_remaining)
 
         else:
             raise Exception('You are not allowed {} for {}. Sorry.'.format(food, meal_type))
+
+    def _set_food_type_allowance_remaining(self, meal_type, food_type, allowance_remaining):
+        self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food_type] = allowance_remaining
+
+    def _is_food_type_allowed_for_meal_type(self, meal_type, food_type):
+        return self._dict_has_all_nested_keys(self._food_types_remaining, self._gender,
+                                              self._meal_plan_type, meal_type, food_type)
 
     @staticmethod
     def _dict_has_all_nested_keys(a_dict, *keys):

@@ -6,7 +6,13 @@ from src.food_option import FoodOption
 
 class TestBrightHelper(TestCase):
 
-    def test_how_much(self):
+    def test_male_weight_loss_breakfast_options_correct(self):
+        """
+        Given a male on a weight loss meal plan
+          and they have not chosen any food yet
+        When he asks for breakfast grain options
+        Then he gets all the correct options
+        """
         bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
         actual = bright_helper.get_meal_type_options(MealType.BREAKFAST, FoodType.GRAIN)
         expected = {
@@ -20,11 +26,41 @@ class TestBrightHelper(TestCase):
         }
         self.assertEqual(expected, actual)
 
-    def test_how_much_after_choose(self):
+    def test_how_much_after_choose_all_meal_type_allowance(self):
+        """
+        Given a male on a weight loss meal plan
+        When he chooses 4 oz of potato for breakfast (the whole allowance)
+         and he asks for breakfast grain options
+        Then he gets no options
+
+        """
         bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
 
         bright_helper.choose_food(MealType.BREAKFAST, Food.POTATO, 4)
         actual = bright_helper.get_meal_type_options(MealType.BREAKFAST, FoodType.GRAIN)
         expected = set()
+        self.assertEqual(expected, actual)
+
+    def test_how_much_after_choose_half_meal_type_allowance(self):
+        """
+        Given a male on a weight loss meal plan
+        When he chooses 4 oz of potato for breakfast (the whole allowance)
+         and he asks for breakfast grain options
+        Then he gets all options with only half available oz
+
+        """
+        bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
+
+        bright_helper.choose_food(MealType.BREAKFAST, Food.YAM, 2)
+        actual = bright_helper.get_meal_type_options(MealType.BREAKFAST, FoodType.GRAIN)
+        expected = {
+            FoodOption(Food.POTATO, 2), FoodOption(Food.POTATO_SWEET, 2),
+            FoodOption(Food.YAM, 2), FoodOption(Food.RICE, 2),
+            FoodOption(Food.QUINOA, 2), FoodOption(Food.MILLET, 2),
+            FoodOption(Food.OATMEAL, 0.5), FoodOption(Food.BRAN_OAT, 0.5),
+            FoodOption(Food.CREAM_OF_RICE, 0.5), FoodOption(Food.GRITS, 0.5),
+            FoodOption(Food.CREAM_OF_WHEAT, 0.5), FoodOption(Food.QUINOA_FLAKES, 0.5),
+            FoodOption(Food.CEREAL, 0.5)
+        }
         self.assertEqual(expected, actual)
 
