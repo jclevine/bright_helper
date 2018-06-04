@@ -42,8 +42,22 @@ class PyAllowanceMaster(object):
         else:
             return []
 
-    def choose_food(self, meal_type, food_type):
-        pass
+    def choose_food(self, meal_type, food, ounces):
+        if self._dict_has_all_nested_keys(self._food_types_remaining, self._gender,
+                                          self._meal_plan_type, meal_type, food.type):
+            food_type_remaining = self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food.type]
+            one_serving_in_oz = self._food_master.get_one_serving_in_ounces(food)
+            oz_remaining = food_type_remaining * one_serving_in_oz
+
+            if ounces > oz_remaining:
+                raise Exception('{} oz of {} is more than your limit for {} -- only {} oz remaining'
+                                .format(ounces, food, meal_type, oz_remaining))
+            else:
+                percentage_of_food_type_remaining = food_type_remaining - (ounces / one_serving_in_oz)
+                self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food.type] = percentage_of_food_type_remaining
+
+        else:
+            raise Exception('You are not allowed {} for {}. Sorry.'.format(food, meal_type))
 
     @staticmethod
     def _dict_has_all_nested_keys(a_dict, *keys):
@@ -54,4 +68,3 @@ class PyAllowanceMaster(object):
             except KeyError:
                 return False
         return True
-

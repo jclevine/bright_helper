@@ -24,5 +24,16 @@ class PyFoodMaster(object):
         self._gender = gender
         self._meal_plan_type = meal_plan_type
 
-    def get_options(self, food_type, amount_remaining):
-        return {food_option for food_option in self._plan[self._gender][self._meal_plan_type][food_type]}
+    def get_one_serving_in_ounces(self, food):
+        return {
+            food_option.ounces
+            for food_option in self._plan[self._gender][self._meal_plan_type][food.type]
+            if food_option.food == food
+        }.pop()
+
+    def get_options(self, food_type, food_type_remaining):
+        return {
+            FoodOption(food_option.food, food_option.ounces * food_type_remaining)
+            for food_option in self._plan[self._gender][self._meal_plan_type][food_type]
+            if food_option.ounces * food_type_remaining != 0
+        }

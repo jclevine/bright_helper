@@ -6,32 +6,6 @@ from src.food_option import FoodOption
 
 class TestBrightHelper(TestCase):
 
-    def setUp(self):
-        self.bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
-
-    # def test_male_weight_loss_meal_allowances(self):
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.BREAKFAST, FoodType.PROTEIN))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.BREAKFAST, FoodType.GRAIN))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.BREAKFAST, FoodType.FRUIT))
-    #     self.assertEqual(0, self.bright_helper.get_allowance(MealType.BREAKFAST, FoodType.VEGGIES))
-    #     self.assertEqual(0, self.bright_helper.get_allowance(MealType.BREAKFAST, FoodType.FAT))
-    #     self.assertEqual(0, self.bright_helper.get_allowance(MealType.BREAKFAST, FoodType.SALAD))
-    #
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.LUNCH, FoodType.PROTEIN))
-    #     self.assertEqual(0, self.bright_helper.get_allowance(MealType.LUNCH, FoodType.GRAIN))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.LUNCH, FoodType.FRUIT))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.LUNCH, FoodType.VEGGIES))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.LUNCH, FoodType.FAT))
-    #     self.assertEqual(0, self.bright_helper.get_allowance(MealType.LUNCH, FoodType.SALAD))
-    #
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.DINNER, FoodType.PROTEIN))
-    #     self.assertEqual(0, self.bright_helper.get_allowance(MealType.DINNER, FoodType.GRAIN))
-    #     self.assertEqual(0, self.bright_helper.get_allowance(MealType.DINNER, FoodType.FRUIT))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.DINNER, FoodType.VEGGIES))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.DINNER, FoodType.FAT))
-    #     self.assertEqual(1, self.bright_helper.get_allowance(MealType.DINNER, FoodType.SALAD))
-    pass
-
     def test_how_much(self):
         bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
         actual = bright_helper.get_meal_type_options(MealType.BREAKFAST, FoodType.GRAIN)
@@ -46,4 +20,11 @@ class TestBrightHelper(TestCase):
         }
         self.assertEqual(expected, actual)
 
+    def test_how_much_after_choose(self):
+        bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
+
+        bright_helper.choose_food(MealType.BREAKFAST, Food.POTATO, 4)
+        actual = bright_helper.get_meal_type_options(MealType.BREAKFAST, FoodType.GRAIN)
+        expected = set()
+        self.assertEqual(expected, actual)
 
