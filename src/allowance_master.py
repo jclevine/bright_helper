@@ -8,21 +8,21 @@ class PyAllowanceMaster(object):
         Gender.MALE: {
             MealPlanType.WEIGHT_LOSS: {
                 MealType.BREAKFAST: {
-                    FoodType.PROTEIN: 1,
-                    FoodType.GRAIN: 1,
-                    FoodType.FRUIT: 1
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.GRAIN: 1.0,
+                    FoodType.FRUIT: 1.0
                 },
                 MealType.LUNCH: {
-                    FoodType.PROTEIN: 1,
-                    FoodType.VEGGIES: 1,
-                    FoodType.FRUIT: 1,
-                    FoodType.FAT: 1
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.FRUIT: 1.0,
+                    FoodType.FAT: 1.0
                 },
                 MealType.DINNER: {
-                    FoodType.PROTEIN: 1,
-                    FoodType.VEGGIES: 1,
-                    FoodType.SALAD: 1,
-                    FoodType.FAT: 1
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.SALAD: 1.0,
+                    FoodType.FAT: 1.0
                 }
             }
         }
