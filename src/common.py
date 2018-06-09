@@ -53,3 +53,32 @@ class Food(Enum):
     def __repr__(self):
         return self.value
 
+
+class DayOfWeek(Enum):
+    MONDAY = ('Monday', 0)
+    TUESDAY = ('Tuesday', 1)
+    WEDNESDAY = ('Wednesday', 2)
+    THURSDAY = ('Thursday', 3)
+    FRIDAY = ('Friday', 4)
+    SATURDAY = ('Saturday', 5)
+    SUNDAY = ('Sunday', 6)
+
+    @property
+    def name(self):
+        return self.value[0]
+
+    @property
+    def index(self):
+        return self.value[1]
+
+    def __eq__(self, other):
+        return self.index == other.index
+
+    def __hash__(self):
+        return hash(self.name)
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
