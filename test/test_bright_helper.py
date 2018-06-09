@@ -44,7 +44,7 @@ class TestBrightHelper(TestCase):
     def test_how_much_after_choose_half_meal_type_allowance(self):
         """
         Given a male on a weight loss meal plan
-        When he chooses 4 oz of potato for breakfast (half the allowance)
+        When he chooses 2 oz of potato for breakfast (half the allowance)
          and he asks for breakfast grain options
         Then he gets all options with only half available oz
 
@@ -81,7 +81,7 @@ class TestBrightHelper(TestCase):
         expected = set()
         self.assertEqual(expected, actual)
 
-    def test_(self):
+    def test_get_male_weight_loss_breakfast_allowances(self):
         """
         Given a male on a weight loss meal plan
         When he asks for his allowances left for breakfast
@@ -94,5 +94,24 @@ class TestBrightHelper(TestCase):
             FoodType.GRAIN: 1,
             FoodType.PROTEIN: 1,
             FoodType.FRUIT: 1
+        }
+        self.assertEqual(expected, actual)
+
+    def test_how_much_allowances_after_choose_half_breakfast_allowance(self):
+        """
+        Given a male on a weight loss meal plan
+        When he chooses 2 oz of potato for breakfast (half the allowance)
+         and he asks for the remaining breakfast food allowances
+        Then he gets all of them, except for half of the grain.
+
+        """
+        bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
+
+        bright_helper.choose_food(MealType.BREAKFAST, Food.POTATO, 2)
+        actual = bright_helper.get_meal_allowances(MealType.BREAKFAST)
+        expected = {
+            FoodType.GRAIN: 0.5,
+            FoodType.PROTEIN: 1,
+            FoodType.FRUIT: 1,
         }
         self.assertEqual(expected, actual)
