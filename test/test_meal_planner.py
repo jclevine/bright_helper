@@ -10,17 +10,17 @@ class TestMealPlanner(TestCase):
 
     def test_meal_plan_length(self):
         """
-        Given a meal planer for 2 days
+        Given a meal plan for 2 days starting today
         When you ask for the length of the meal plan
         Then it returns 2
         """
         meal_planner = MealPlanner(plan_length=2)
         self.assertEqual(2, meal_planner.plan_length)
 
-    @patch('src.meal_planner.date', return_value=Mock(side_effect=lambda *args, **kw: date(*args, **kw)))
+    @patch('src.meal_planner.date', return_value=Mock())
     def test_get_empty_meal_plan(self, mock_date):
         """
-        Given a meal planer for 2 days from today
+        Given a meal plan for 2 days starting today
           and today is Wednesday, Aug 29, 2018
         When you ask for the meal plan
         Then it returns Wednesday & Thursday with nothing in them
@@ -31,5 +31,27 @@ class TestMealPlanner(TestCase):
         expected = {
             DayOfWeek.WEDNESDAY: {},
             DayOfWeek.THURSDAY: {}
+        }
+        self.assertEqual(expected, meal_planner.get_current_plan())
+
+    @patch('src.meal_planner.date', return_value=Mock())
+    def test_get_empty_meal_plan_that_cycles_week(self, mock_date):
+        """
+        Given a meal plan for 7 days from today
+          and today is Wednesday, Aug 29, 2018
+        When you ask for the meal plan
+        Then it returns Wednesday through Tuesday with nothing in them
+        """
+        mock_date.today.return_value = date(2018, 8, 29)
+
+        meal_planner = MealPlanner(start_in_days=0, plan_length=7)
+        expected = {
+            DayOfWeek.WEDNESDAY: {},
+            DayOfWeek.THURSDAY: {},
+            DayOfWeek.FRIDAY: {},
+            DayOfWeek.SATURDAY: {},
+            DayOfWeek.SUNDAY: {},
+            DayOfWeek.MONDAY: {},
+            DayOfWeek.TUESDAY: {}
         }
         self.assertEqual(expected, meal_planner.get_current_plan())
