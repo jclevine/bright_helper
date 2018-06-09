@@ -1,4 +1,4 @@
-from src.common import MealPlanType
+from src.common import MealPlanType, MealType
 from src.allowance_master import PyAllowanceMaster as AllowanceMaster
 
 
@@ -17,4 +17,6 @@ class BrightHelper(object):
         self._allowance_master.choose_food(meal_type, food, ounces)
 
     def get_meal_allowances(self, meal_type):
+        if meal_type == MealType.ALL:
+            return {meal_type: self._allowance_master.get_meal_allowances(meal_type) for meal_type in MealType.get_all()}
         return self._allowance_master.get_meal_allowances(meal_type)

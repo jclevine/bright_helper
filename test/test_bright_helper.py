@@ -115,3 +115,33 @@ class TestBrightHelper(TestCase):
             FoodType.FRUIT: 1,
         }
         self.assertEqual(expected, actual)
+
+    def test_get_meal_allowances_for_all_meal_types(self):
+        """
+        Given a male on a weight loss meal plan
+        When he asks for the remaining food allowances for all meal types (i.e., Breakfast, Lunch & Dinner)
+        Then he gets all of them by month
+        """
+        bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
+
+        actual = bright_helper.get_meal_allowances(MealType.ALL)
+        expected = {
+            MealType.BREAKFAST: {
+                FoodType.PROTEIN: 1.0,
+                FoodType.GRAIN: 1.0,
+                FoodType.FRUIT: 1.0
+            },
+            MealType.LUNCH: {
+                FoodType.PROTEIN: 1.0,
+                FoodType.VEGGIES: 1.0,
+                FoodType.FRUIT: 1.0,
+                FoodType.FAT: 1.0
+            },
+            MealType.DINNER: {
+                FoodType.PROTEIN: 1.0,
+                FoodType.VEGGIES: 1.0,
+                FoodType.SALAD: 1.0,
+                FoodType.FAT: 1.0
+            }
+        }
+        self.assertEqual(expected, actual)

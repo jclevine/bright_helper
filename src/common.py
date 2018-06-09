@@ -10,6 +10,11 @@ class MealType(Enum):
     BREAKFAST = 'Breakfast'
     LUNCH = 'Lunch'
     DINNER = 'Dinner'
+    ALL = 'All'
+
+    @classmethod
+    def get_all(cls):
+        return [cls.BREAKFAST, cls.LUNCH, cls.DINNER]
 
     def __str__(self):
         return self.value
