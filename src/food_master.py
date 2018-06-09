@@ -16,6 +16,19 @@ class PyFoodMaster(object):
                     FoodOption(Food.CEREAL, 1)
                 }
             }
+        },
+        Gender.FEMALE: {
+            MealPlanType.WEIGHT_LOSS: {
+                FoodType.GRAIN: {
+                    FoodOption(Food.POTATO, 4), FoodOption(Food.POTATO_SWEET, 4),
+                    FoodOption(Food.YAM, 4), FoodOption(Food.RICE, 4),
+                    FoodOption(Food.QUINOA, 4), FoodOption(Food.MILLET, 4),
+                    FoodOption(Food.OATMEAL, 1), FoodOption(Food.BRAN_OAT, 1),
+                    FoodOption(Food.CREAM_OF_RICE, 1), FoodOption(Food.GRITS, 1),
+                    FoodOption(Food.CREAM_OF_WHEAT, 1), FoodOption(Food.QUINOA_FLAKES, 1),
+                    FoodOption(Food.CEREAL, 1)
+                }
+            }
         }
 
     }

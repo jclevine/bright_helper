@@ -15,3 +15,6 @@ class BrightHelper(object):
 
     def choose_food(self, meal_type, food, ounces):
         self._allowance_master.choose_food(meal_type, food, ounces)
+
+    def get_meal_allowances(self, meal_type):
+        return self._allowance_master.get_meal_allowances(meal_type)

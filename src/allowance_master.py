@@ -42,7 +42,7 @@ class PyAllowanceMaster(object):
             return set()
 
     def _get_food_type_allowance_remaining(self, meal_type, food_type):
-        return self._food_types_remaining[self._gender][self._meal_plan_type][meal_type][food_type]
+        return self.get_meal_allowances(meal_type)[food_type]
 
     def choose_food(self, meal_type, food, ounces):
         if self._is_food_type_allowed_for_meal_type(meal_type, food.type):
@@ -76,3 +76,6 @@ class PyAllowanceMaster(object):
             except KeyError:
                 return False
         return True
+
+    def get_meal_allowances(self, meal_type):
+        return self._food_types_remaining[self._gender][self._meal_plan_type][meal_type]

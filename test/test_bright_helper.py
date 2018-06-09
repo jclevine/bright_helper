@@ -80,3 +80,19 @@ class TestBrightHelper(TestCase):
         actual = bright_helper.get_meal_type_options(MealType.BREAKFAST, FoodType.GRAIN)
         expected = set()
         self.assertEqual(expected, actual)
+
+    def test_(self):
+        """
+        Given a male on a weight loss meal plan
+        When he asks for his allowances left for breakfast
+        Then he gets 1 Grain, 1 Protein, and 1 Fruit
+        """
+        bright_helper = BrightHelper.build_weight_loss_helper(Gender.MALE)
+
+        actual = bright_helper.get_meal_allowances(MealType.BREAKFAST)
+        expected = {
+            FoodType.GRAIN: 1,
+            FoodType.PROTEIN: 1,
+            FoodType.FRUIT: 1
+        }
+        self.assertEqual(expected, actual)
