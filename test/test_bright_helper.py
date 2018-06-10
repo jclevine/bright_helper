@@ -145,3 +145,24 @@ class TestBrightHelper(TestCase):
             }
         }
         self.assertEqual(expected, actual)
+
+    def test_clone_bright_helper(self):
+        """
+        Given you have a bright helper
+         When you clone it
+          and choose food for the first helper
+          and ask for the allowances for the 2nd helper
+         Then the 2nd helper will get a "clean" plan with all its allowances
+        """
+        bright_helper_1 = BrightHelper.build_weight_loss_helper(Gender.MALE)
+        bright_helper_2 = BrightHelper.clone(bright_helper_1)
+        bright_helper_1.choose_food(MealType.BREAKFAST, Food.MILK_NON_DAIRY, 8)
+
+        actual = bright_helper_2.get_meal_allowances(MealType.BREAKFAST)
+        expected = {
+            FoodType.GRAIN: 1,
+            FoodType.PROTEIN: 1,
+            FoodType.FRUIT: 1,
+        }
+        self.assertEqual(expected, actual)
+

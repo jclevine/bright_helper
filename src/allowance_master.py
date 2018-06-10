@@ -34,6 +34,14 @@ class PyAllowanceMaster(object):
         self._food_types_remaining = deepcopy(self._allowance_bible)
         self._food_master = FoodMaster(gender, meal_plan_type)
 
+    @property
+    def gender(self):
+        return self._gender
+
+    @property
+    def meal_plan_type(self):
+        return self._meal_plan_type
+
     def get_meal_type_options(self, meal_type, food_type):
         if self._is_food_type_allowed_for_meal_type(meal_type, food_type):
             food_type_allowance_remaining = self._get_food_type_allowance_remaining(meal_type, food_type)
