@@ -25,3 +25,6 @@ class MealPlanner(object):
 
     def get_food_options(self, day_of_week, meal_type, food_type):
         return self._meal_plan_helper.get_meal_type_options(meal_type, food_type)
+
+    def choose_food(self, day_of_week, meal_type, food, ounces):
+        self._meal_plan_helper.choose_food(meal_type, food, ounces)

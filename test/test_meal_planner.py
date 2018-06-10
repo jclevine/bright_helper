@@ -129,4 +129,29 @@ class TestMealPlanner(TestCase):
 
         self.assertEqual(expected, actual)
 
+    def test_choose_food(self):
+        """
+        Given a 2-day meal plan for a weight losing male
+         When you choose 4oz of non-dairy milk for breakfast on Wednesday
+          and you ask for food options for protein for breakfast on Wednesday
+         Then it returns all the possible protein options for 0.5 Breakfast Protein (4oz of milk is 1/2 the allowance)
+        """
+        meal_planner = MealPlanner(self._male_weight_loss_helper, plan_length=2)
+        meal_planner.choose_food(DayOfWeek.WEDNESDAY, MealType.BREAKFAST, Food.MILK_NON_DAIRY, 4)
+
+        actual = meal_planner.get_food_options(DayOfWeek.WEDNESDAY, MealType.BREAKFAST, FoodType.PROTEIN)
+
+        expected = {
+            FoodOption(Food.MILK_NON_DAIRY, 4.0), FoodOption(Food.TOFU, 3.0),
+            FoodOption(Food.TEMPEH, 3.0), FoodOption(Food.BEANS, 3.0),
+            FoodOption(Food.BEANS_ROASTED, 1.5), FoodOption(Food.LENTILS, 3.0),
+            FoodOption(Food.HUMMUS, 3.0), FoodOption(Food.SOYA_GRANULES, 1.5),
+            FoodOption(Food.EDAMAME_SHELLED, 3.0), FoodOption(Food.NUTS, 1.0),
+            FoodOption(Food.NUT_BUTTER, 1.0), FoodOption(Food.VEGGIE_BURGER, 3.0),
+            FoodOption(Food.SEEDS, 1.0), FoodOption(Food.NUTS_SOY, 1.5),
+            FoodOption(Food.EDAMAME_DRY_ROASTED, 1.5)
+        }
+
+        self.assertEqual(expected, actual)
+
 

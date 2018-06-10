@@ -12,7 +12,7 @@ class FoodOption(object):
         return self._ounces
 
     def __eq__(self, other):
-        return self.food == other.food
+        return self.food == other.food and self.ounces == other.ounces
 
     def __hash__(self):
         return hash(self._food)

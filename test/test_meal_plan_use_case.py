@@ -80,6 +80,10 @@ class TestMealPlanUseCase(TestCase):
         }
 
         self.assertEqual(expected, food_options)
+
+        meal_planner.choose_food(DayOfWeek.WEDNESDAY, MealType.BREAKFAST, Food.MILK_NON_DAIRY, 4)
+
+
         # bright_helper.choose_food(MealType.BREAKFAST, Food.POTATO, 2)
         # actual = bright_helper.get_meal_allowances(MealType.BREAKFAST)
         # expected = {
