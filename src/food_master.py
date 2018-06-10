@@ -14,6 +14,16 @@ class PyFoodMaster(object):
                     FoodOption(Food.CREAM_OF_RICE, 1), FoodOption(Food.GRITS, 1),
                     FoodOption(Food.CREAM_OF_WHEAT, 1), FoodOption(Food.QUINOA_FLAKES, 1),
                     FoodOption(Food.CEREAL, 1)
+                },
+                FoodType.PROTEIN: {
+                    FoodOption(Food.MILK_NON_DAIRY, 8), FoodOption(Food.TOFU, 6),
+                    FoodOption(Food.TEMPEH, 6), FoodOption(Food.BEANS, 6),
+                    FoodOption(Food.BEANS_ROASTED, 3), FoodOption(Food.LENTILS, 6),
+                    FoodOption(Food.HUMMUS, 6), FoodOption(Food.SOYA_GRANULES, 3),
+                    FoodOption(Food.EDAMAME_SHELLED, 6), FoodOption(Food.NUTS, 2),
+                    FoodOption(Food.NUT_BUTTER, 2), FoodOption(Food.VEGGIE_BURGER, 6),
+                    FoodOption(Food.SEEDS, 2), FoodOption(Food.NUTS_SOY, 3),
+                    FoodOption(Food.EDAMAME_DRY_ROASTED, 3)
                 }
             }
         },

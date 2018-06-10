@@ -1,5 +1,4 @@
 from datetime import date, timedelta
-import calendar
 from src.common import DayOfWeek, MealType
 from itertools import cycle, islice
 
@@ -23,3 +22,6 @@ class MealPlanner(object):
 
     def get_meal_allowances(self):
         return {day_of_week: self._meal_plan_helper.get_meal_allowances(MealType.ALL) for day_of_week in self._all_days}
+
+    def get_food_options(self, day_of_week, meal_type, food_type):
+        return self._meal_plan_helper.get_meal_type_options(meal_type, food_type)

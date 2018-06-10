@@ -48,6 +48,22 @@ class Food(Enum):
     BRAN_OAT = ('Oat Bran', FoodType.GRAIN)
     CEREAL = ('Cereal', FoodType.GRAIN)
 
+    MILK_NON_DAIRY = ('Milk, Non-Dairy', FoodType.PROTEIN)
+    TOFU = ('Tofu', FoodType.PROTEIN)
+    TEMPEH = ('Tempeh', FoodType.PROTEIN)
+    BEANS = ('Beans', FoodType.PROTEIN)
+    BEANS_ROASTED = ('Beans, Roasted', FoodType.PROTEIN)
+    LENTILS = ('Lentils', FoodType.PROTEIN)
+    HUMMUS = ('Hummus', FoodType.PROTEIN)
+    SOYA_GRANULES = ('Soya Granules', FoodType.PROTEIN)
+    EDAMAME_SHELLED = ('Edamame, Shelled', FoodType.PROTEIN)
+    NUTS = ('Nuts', FoodType.PROTEIN)
+    NUT_BUTTER = ('Nut Butter', FoodType.PROTEIN)
+    VEGGIE_BURGER = ('Veggie Burger', FoodType.PROTEIN)
+    SEEDS = ('Seeds', FoodType.PROTEIN)
+    NUTS_SOY = ('Nuts, Soy', FoodType.PROTEIN)
+    EDAMAME_DRY_ROASTED = ('Edamame, Dry Roasted', FoodType.PROTEIN)
+
     @property
     def type(self):
         return self.value[1]
