@@ -25,6 +25,27 @@ class PyAllowanceMaster(object):
                     FoodType.FAT: 1.0
                 }
             }
+        },
+        Gender.FEMALE: {
+            MealPlanType.WEIGHT_LOSS: {
+                MealType.BREAKFAST: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.GRAIN: 1.0,
+                    FoodType.FRUIT: 1.0
+                },
+                MealType.LUNCH: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.FRUIT: 1.0,
+                    FoodType.FAT: 1.0
+                },
+                MealType.DINNER: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.SALAD: 1.0,
+                    FoodType.FAT: 1.0
+                }
+            }
         }
     }
 

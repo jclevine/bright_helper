@@ -166,3 +166,15 @@ class TestBrightHelper(TestCase):
         }
         self.assertEqual(expected, actual)
 
+    def test_female_portion_size(self):
+        """
+        Given a female weight loss helper
+         When you choose your whole allowance for breakfast protein (4oz of tofu)
+          and you ask for your breakfast protein options
+         Then you get nothing, because 4oz is your full allowance
+        """
+        bright_helper = BrightHelper.build_weight_loss_helper(Gender.FEMALE)
+        bright_helper.choose_food(MealType.BREAKFAST, Food.TOFU, 4)
+        actual = bright_helper.get_meal_type_options(MealType.BREAKFAST, FoodType.PROTEIN)
+        expected = set()
+        self.assertEqual(expected, actual)

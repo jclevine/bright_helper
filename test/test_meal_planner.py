@@ -151,6 +151,7 @@ class TestMealPlanner(TestCase):
             FoodOption(Food.SEEDS, 1.0), FoodOption(Food.NUTS_SOY, 1.5),
             FoodOption(Food.EDAMAME_DRY_ROASTED, 1.5)
         }
+        self.assertEqual(expected, actual)
 
     def test_choose_food_for_one_day_and_then_look_at_all_allowances(self):
         """
@@ -258,4 +259,3 @@ class TestMealPlanner(TestCase):
             }
         }
         self.assertEqual(expected, actual)
-
