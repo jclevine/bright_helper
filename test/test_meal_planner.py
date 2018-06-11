@@ -207,4 +207,55 @@ class TestMealPlanner(TestCase):
 
         self.assertEqual(expected, actual)
 
+    def test_multiple_day_choose_food(self):
+        """
+        Given a 2-day meal plan for a weight losing male
+         When you choose all your grain (1oz of cereal) for both Wednesday & Thursday
+          and you ask for all your meal allowances
+         Then you get both Wednesday & Thursday with no breakfast grain allowance left
+        """
+        meal_planner = MealPlanner(self._male_weight_loss_helper, plan_length=2)
+        meal_planner.choose_food([DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY], MealType.BREAKFAST, Food.CEREAL, 1)
+        actual = meal_planner.get_meal_allowances()
+        expected = {
+            DayOfWeek.WEDNESDAY: {
+                MealType.BREAKFAST: {
+                    FoodType.PROTEIN: 1,
+                    FoodType.GRAIN: 0.0,
+                    FoodType.FRUIT: 1.0
+                },
+                MealType.LUNCH: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.FRUIT: 1.0,
+                    FoodType.FAT: 1.0
+                },
+                MealType.DINNER: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.SALAD: 1.0,
+                    FoodType.FAT: 1.0
+                }
+            },
+            DayOfWeek.THURSDAY: {
+                MealType.BREAKFAST: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.GRAIN: 0.0,
+                    FoodType.FRUIT: 1.0
+                },
+                MealType.LUNCH: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.FRUIT: 1.0,
+                    FoodType.FAT: 1.0
+                },
+                MealType.DINNER: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.SALAD: 1.0,
+                    FoodType.FAT: 1.0
+                }
+            }
+        }
+        self.assertEqual(expected, actual)
 
