@@ -152,6 +152,59 @@ class TestMealPlanner(TestCase):
             FoodOption(Food.EDAMAME_DRY_ROASTED, 1.5)
         }
 
+    def test_choose_food_for_one_day_and_then_look_at_all_allowances(self):
+        """
+        Given a 2-day meal plan for a weight losing male
+         When you choose 4oz of non-dairy milk for breakfast on Wednesday
+          and you ask for your entire meal plan's allowances
+         Then it returns Wednesday with only 0.5 protein and everything else is 1
+        """
+        meal_planner = MealPlanner(self._male_weight_loss_helper, plan_length=2)
+        meal_planner.choose_food(DayOfWeek.WEDNESDAY, MealType.BREAKFAST, Food.MILK_NON_DAIRY, 4)
+
+        actual = meal_planner.get_meal_allowances()
+
+        expected = {
+            DayOfWeek.WEDNESDAY: {
+                MealType.BREAKFAST: {
+                    FoodType.PROTEIN: 0.5,
+                    FoodType.GRAIN: 1.0,
+                    FoodType.FRUIT: 1.0
+                },
+                MealType.LUNCH: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.FRUIT: 1.0,
+                    FoodType.FAT: 1.0
+                },
+                MealType.DINNER: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.SALAD: 1.0,
+                    FoodType.FAT: 1.0
+                }
+            },
+            DayOfWeek.THURSDAY: {
+                MealType.BREAKFAST: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.GRAIN: 1.0,
+                    FoodType.FRUIT: 1.0
+                },
+                MealType.LUNCH: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.FRUIT: 1.0,
+                    FoodType.FAT: 1.0
+                },
+                MealType.DINNER: {
+                    FoodType.PROTEIN: 1.0,
+                    FoodType.VEGGIES: 1.0,
+                    FoodType.SALAD: 1.0,
+                    FoodType.FAT: 1.0
+                }
+            }
+        }
+
         self.assertEqual(expected, actual)
 
 
