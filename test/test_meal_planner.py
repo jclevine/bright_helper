@@ -221,7 +221,7 @@ class TestMealPlanner(TestCase):
         expected = {
             DayOfWeek.WEDNESDAY: {
                 MealType.BREAKFAST: {
-                    FoodType.PROTEIN: 1,
+                    FoodType.PROTEIN: 1.0,
                     FoodType.GRAIN: 0.0,
                     FoodType.FRUIT: 1.0
                 },
@@ -259,3 +259,21 @@ class TestMealPlanner(TestCase):
             }
         }
         self.assertEqual(expected, actual)
+
+    def get_meal_allowances_by_day_of_week_and_meal_type(self):
+        """
+        Given a 2-day meal plan for a weight losing male
+         When you choose all your protein (2oz of nut butter) for Wednesday
+          and you ask for your meal allowances for Wednesday protein
+         Then you get both no breakfast protein left
+        """
+        meal_planner = MealPlanner(self._male_weight_loss_helper, plan_length=2)
+        meal_planner.choose_food(DayOfWeek.WEDNESDAY, MealType.BREAKFAST, Food.NUT_BUTTER, 2.0)
+        actual = meal_planner.get_meal_allowances_by_day_and_meal(DayOfWeek.WEDNESDAY, MealType.BREAKFAST)
+
+        self.assertEqual({
+            FoodType.PROTEIN: 0.0,
+            FoodType.GRAIN: 1.0,
+            FoodType.FRUIT: 1.0
+        }, actual)
+

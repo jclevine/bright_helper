@@ -31,6 +31,7 @@ class FoodType(Enum):
 
 class MealPlanType(Enum):
     WEIGHT_LOSS = 'Weight Loss'
+    MAINTENANCE = 'Maintenance'
 
 
 class Food(Enum):

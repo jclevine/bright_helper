@@ -100,10 +100,10 @@ class PyAllowanceMaster(object):
     def _dict_has_all_nested_keys(a_dict, *keys):
         _element = a_dict
         for key in keys:
-            try:
-                _element = _element[key]
-            except KeyError:
+            if key not in _element:
                 return False
+            else:
+                _element = _element[key]
         return True
 
     def get_meal_allowances(self, meal_type):
