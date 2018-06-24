@@ -70,3 +70,7 @@ class PyFoodMaster(object):
             for food_option in self._plan[self._gender][self._meal_plan_type][food_type]
             if food_option.ounces * food_type_remaining != 0
         }
+
+    @staticmethod
+    def get_food_type(food):
+        return Food.get_food_type(food)

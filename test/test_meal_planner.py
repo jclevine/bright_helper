@@ -307,3 +307,12 @@ class TestMealPlanner(TestCase):
                 FoodType.FAT: 1.0
             }
         }, actual)
+
+    def test_has_more_allowance(self):
+        """
+        Given a 2-day meal plan for a weight losing male
+         When you ask if there is any more meal allowances for Wednesday breakfast protein
+         Then you get True
+        """
+        meal_planner = MealPlanner(self._male_weight_loss_helper, plan_length=2)
+        self.assertTrue(meal_planner.has_more_allowance(DayOfWeek.WEDNESDAY, MealType.BREAKFAST, FoodType.PROTEIN))

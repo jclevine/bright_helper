@@ -75,6 +75,10 @@ class Food(Enum):
     def __repr__(self):
         return self.value
 
+    @staticmethod
+    def get_food_type(food_target):
+        return [food.type for food in list(Food) if food == food_target].pop()
+
 
 class DayOfWeek(Enum):
     MONDAY = ('Monday', 0)
